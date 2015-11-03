@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <h1>Erin's Erotic Escape!!</h1>
-    <title>Erin's Erotic Escape</title>
-    <link rel="stylesheet" href="css/jquery.mobile.structure.css">
-    <link rel="stylesheet" href="css/jquery.mobile.theme.css">
-    <link rel="stylesheet" href="css/jquery.mobile.icons.css">
-    <script src="cordova.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.mobile.js"></script>
-       <style>
+    <title>Assignment 5</title>
+    <script src="jquery.min.js"></script>
+    <style>
         body{
             text-align: center;
         }
@@ -78,9 +72,7 @@
             name: $('#username').val(),
             password: $('#password').val()
         }
-        
-        console.log("--login--");
-        $.post(server, data, loginResponse).fail(registerResponse);
+        $.post(server, data, loginResponse)
      }
     //insert the login response and if the username and password isnt inserted it will prompt to provide information
     function loginResponse(response) {
@@ -102,7 +94,6 @@
             action: 'checkLogin'
         }
         $.post(server, data, loginResponse);
-        console.log("--pageloaded");
     }
     
     function logout() {
@@ -114,12 +105,13 @@
     }
     function logoutResponse(response) {
         console.log(response);
-        show('#login');
-        $('username').val('');
-        $('password').val('');
-    }
+             show('#login');
+             $('username').val('');
+             $('password').val('');
+        }
        
   
+    $(document).ready(pageLoaded);
     //a function to see an ongoing chat between users
     function message() {
         var data = {
@@ -168,9 +160,8 @@
     });
     
 </script>
-</head>
+
 <body>
-    <div data-role='page'>
      <section id="login">
         <button onclick='login()'>Login</button>
         <input id="username" placeholder="username">
@@ -208,6 +199,6 @@
         <button onclick="send()">Send</button>
     </section>
     <br>
-</div>
+
 </body>
 </html>
