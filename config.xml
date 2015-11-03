@@ -4,6 +4,7 @@
     <description>
         An example for phonegap build docs. 
     </description>
+    <plugin name="cordova-plugin-whitelist" version="1" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*" />

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:">
     <h1>Erin's Erotic Escape!!</h1>
     <title>Erin's Erotic Escape</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:">
     <link rel="stylesheet" href="css/jquery.mobile.structure.css">
     <link rel="stylesheet" href="css/jquery.mobile.theme.css">
     <link rel="stylesheet" href="css/jquery.mobile.icons.css">
     <script src="cordova.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.mobile.js"></script>
-       <style>
+    <style>
         body{
             text-align: center;
         }
@@ -47,168 +47,171 @@
             display: none;
         }
     </style>
-
-<script>
-    var server = "http://192.168.0.21/Ajax/A5.php";
-    
-    
-    function show(section) {
-        $('section').slideUp(500);
-        $(section).slideDown(500);
-    }
-    
-    //a function to begin register with username, password and confirm
-    function register() {
-        var data = {
-            action: 'register',
-            username: $('#registerUser').val(),
-            password: $('#registerPass').val(),
-            confirm: $('#registerConfirm').val()
-        }
-        $.post(server, data, registerResponse)
-    }
-    //insert the register response
-    function registerResponse(response){
-        console.log(response);
-    }
-   
-       //a function to login with name and password
-    function login() {
-        var data = {
-            action: 'login',
-            name: $('#username').val(),
-            password: $('#password').val()
+    <script>
+        var server = "http://192.168.0.21/Ajax/A5.php";
+        
+        
+        function show(section) {
+            $('section').slideUp(500);
+            $(section).slideDown(500);
         }
         
-        console.log("--login--");
-        $.post(server, data, loginResponse).fail(registerResponse);
-     }
-    //insert the login response and if the username and password isnt inserted it will prompt to provide information
-    function loginResponse(response) {
-        console.log(response);
-        if (response=='good to go') {
-            show('#loggedIn, #message');
-           
-            $('#username').val('');
-            $('#password').val('');
-        }else if (response=='no info') {
-            alert("Please provide information");
-        }
-        
-    }
-    $(document).ready(pageLoaded);
-    //checks to see if you are logged in
-    function pageLoaded() {
-        var data = {
-            action: 'checkLogin'
-        }
-        $.post(server, data, loginResponse);
-        console.log("--pageloaded");
-    }
-    
-    function logout() {
-        var data = {
-            action: 'logout'
-           
-        }
-        $.post(server, data, logoutResponse);
-    }
-    function logoutResponse(response) {
-        console.log(response);
-        show('#login');
-        $('username').val('');
-        $('password').val('');
-    }
-       
-  
-    //a function to see an ongoing chat between users
-    function message() {
-        var data = {
-            action: 'message',
-            content: $('#messages').val()
-        }
-        $.post(server, data, messageResponse)
-    }
-    //a function to insert the message response
-    function messageResponse(response) {
-        console.log(response);
-    }
-    //a function to send the messages and show up on screen
-    function send() {
-        var data = {
-            action: 'send',
-            message: $('#talk').val()
-        };
-        
-        $('#talk').val('');
-        $.post(server, data, sendResponse);
-    }
-    //a function to insert the send response
-    function sendResponse(response) {
-        console.log(response);
-    }
-    
-    //a function to show/get messages and set up the time it was sent 
-    function getMessages() {
-        var data = {
-            action: 'message'
-        };
-        $.post(server, data, responseReceived);
-    }
-    
-    function responseReceived(res) {
-        $('#messageArea').html(res);
-    }
-    setInterval(getMessages, 1000);
-    $(document).ready(function() {
-        $('#talk').keyup(function(ev) {
-            if (ev.keyCode==13) {
-                 send();
+        //a function to begin register with username, password and confirm
+        function register() {
+            var data = {
+                action: 'register',
+                username: $('#registerUser').val(),
+                password: $('#registerPass').val(),
+                confirm: $('#registerConfirm').val()
             }
-        })
-    });
-    
-</script>
+            $.post(server, data, registerResponse)
+        }
+        //insert the register response
+        function registerResponse(response){
+            console.log(response);
+        }
+       
+           //a function to login with name and password
+        function login() {
+            var data = {
+                action: 'login',
+                name: $('#username').val(),
+                password: $('#password').val()
+            }
+            
+            console.log("--login--");
+            $.post(server, data, loginResponse).fail(registerResponse);
+         }
+        //insert the login response and if the username and password isnt inserted it will prompt to provide information
+        function loginResponse(response) {
+            console.log(response);
+            if (response=='good to go') {
+                show('#loggedIn, #message');
+               
+                $('#username').val('');
+                $('#password').val('');
+            }else if (response=='no info') {
+                alert("Please provide information");
+            }
+            
+        }
+        $(document).ready(pageLoaded);
+        //checks to see if you are logged in
+        function pageLoaded() {
+            var data = {
+                action: 'checkLogin'
+            }
+            $.post(server, data, loginResponse);
+            console.log("--pageloaded");
+        }
+        
+        function logout() {
+            var data = {
+                action: 'logout'
+               
+            }
+            $.post(server, data, logoutResponse);
+        }
+        function logoutResponse(response) {
+            console.log(response);
+            show('#login');
+            $('username').val('');
+            $('password').val('');
+        }
+           
+      
+        //a function to see an ongoing chat between users
+        function message() {
+            var data = {
+                action: 'message',
+                content: $('#messages').val()
+            }
+            $.post(server, data, messageResponse)
+        }
+        //a function to insert the message response
+        function messageResponse(response) {
+            console.log(response);
+        }
+        //a function to send the messages and show up on screen
+        function send() {
+            var data = {
+                action: 'send',
+                message: $('#talk').val()
+            };
+            
+            $('#talk').val('');
+            $.post(server, data, sendResponse);
+        }
+        //a function to insert the send response
+        function sendResponse(response) {
+            console.log(response);
+        }
+        
+        //a function to show/get messages and set up the time it was sent 
+        function getMessages() {
+            var data = {
+                action: 'message'
+            };
+            $.post(server, data, responseReceived);
+        }
+        
+        function responseReceived(res) {
+            $('#messageArea').html(res);
+        }
+        setInterval(getMessages, 1000);
+        $(document).ready(function() {
+            $('#talk').keyup(function(ev) {
+                if (ev.keyCode==13) {
+                     send();
+                }
+            })
+        });
+        
+    </script>
 </head>
 <body>
     <div data-role='page'>
-     <section id="login">
-        <button onclick='login()'>Login</button>
-        <input id="username" placeholder="username">
-        <input id="password" placeholder="password" type="password">
-        <div><br>
-        Need an Account?
-            <a href="#" onclick="show('#register')">Register</a>
+        <div data-role="header">
+            <h1>Erin's Erotic Escape</h1>
         </div>
-    </section>   
-    <br>
-    <br>
-    <section id="register" class="hidden">
-<!--//made a register button and 3 input id's-->
-        <button onclick="register()">Register</button>
-        <input id="registerUser" placeholder="username">
-        <input id="registerPass" placeholder="password" type="password">
-        <input id="registerConfirm" placeholder="confirm password" type="password">
-    </section>   
-    <br>
-    <br>
-<!--//made a id for loggenIn and button for logout    -->
-    <section id="loggedIn" class="hidden">
-        You are logged in!!<br>
-       <button onclick="logout()">Logout</button><br>
-   </section>
-    <br>
-    <br>
-<!--//made id's with section, div, ul and input.  Added a send button.    -->
-    <section id="message" class="hidden">
-        <div id="scrollArea">
-            <ul id="messageArea"></ul>
+        <div role="main" class="ui-content">
+            <section id="login">
+                <button onclick='login()'>Login</button>
+                <input id="username" placeholder="username">
+                <input id="password" placeholder="password" type="password">
+                <div><br>
+                Need an Account?
+                    <a href="#" onclick="show('#register')">Register</a>
+                </div>
+            </section>   
+            <br>
+            <br>
+            <section id="register" class="hidden">
+                <!--//made a register button and 3 input id's-->
+                <button onclick="register()">Register</button>
+                <input id="registerUser" placeholder="username">
+                <input id="registerPass" placeholder="password" type="password">
+                <input id="registerConfirm" placeholder="confirm password" type="password">
+            </section>   
+            <br>
+            <br>
+            <!--//made a id for loggenIn and button for logout    -->
+            <section id="loggedIn" class="hidden">
+                You are logged in!!<br>
+               <button onclick="logout()">Logout</button><br>
+           </section>
+            <br>
+            <br>
+            <!--//made id's with section, div, ul and input.  Added a send button.    -->
+            <section id="message" class="hidden">
+                <div id="scrollArea">
+                    <ul id="messageArea"></ul>
+                </div>
+        
+                <input id="talk" placeholder="Type Message Here" type="text">
+                <button onclick="send()">Send</button>
+            </section>
         </div>
-
-        <input id="talk" placeholder="Type Message Here" type="text">
-        <button onclick="send()">Send</button>
-    </section>
-    <br>
-</div>
+    </div>
 </body>
 </html>
