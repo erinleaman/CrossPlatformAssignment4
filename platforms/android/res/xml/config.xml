@@ -10,6 +10,8 @@
         An example for phonegap build docs. 
     </description>
     <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <access origin="*" />
     <author email="support@phonegap.com" href="https://build.phonegap.com">
         Hardeep Shoker 
     </author>
