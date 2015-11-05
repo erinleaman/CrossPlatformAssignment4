@@ -9,6 +9,7 @@
     <description>
         An example for phonegap build docs. 
     </description>
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*" />
